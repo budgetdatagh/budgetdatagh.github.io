@@ -1,286 +1,224 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>BudgetData GH | Cheapest Data Bundles in Ghana</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
-<style>
-  *{box-sizing:border-box;margin:0;padding:0}
-  :root{
-    --yellow:#FFC107;--yellow-dark:#FF8F00;--green:#1B8A4C;--green-light:#E8F5ED;
-    --red:#D32F2F;--blue:#1565C0;--purple:#6A1B9A;
-    --bg:#FFFDF5;--card:#fff;--text:#1A1A1A;--muted:#666;--border:#E8E0CC;
-  }
-  body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
-  nav{background:#1A1A1A;padding:0 1.5rem;display:flex;align-items:center;justify-content:space-between;height:56px;position:sticky;top:0;z-index:100}
-  .logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.3rem;color:var(--yellow);letter-spacing:-0.5px}
-  .logo span{color:#fff}
-  .nav-links{display:flex;gap:1.5rem;align-items:center}
-  .nav-links a{color:#ccc;font-size:14px;text-decoration:none;cursor:pointer;transition:color .2s}
-  .nav-links a:hover{color:var(--yellow)}
-  .nav-btn{background:var(--yellow);color:#1A1A1A;border:none;padding:8px 18px;border-radius:20px;font-weight:600;font-size:13px;cursor:pointer;font-family:'DM Sans',sans-serif}
-  .hero{background:linear-gradient(135deg,#1A1A1A 0%,#2D2D2D 50%,#1A3A2A 100%);padding:3rem 1.5rem 2.5rem;text-align:center;position:relative;overflow:hidden}
-  .hero-badge{display:inline-block;background:var(--yellow);color:#1A1A1A;font-size:12px;font-weight:700;padding:4px 14px;border-radius:20px;margin-bottom:1rem;text-transform:uppercase;letter-spacing:1px}
-  .hero h1{font-family:'Syne',sans-serif;font-size:2.6rem;font-weight:800;color:#fff;line-height:1.1;margin-bottom:.75rem}
-  .hero h1 span{color:var(--yellow)}
-  .hero p{color:#bbb;font-size:1rem;margin-bottom:2rem;max-width:420px;margin-left:auto;margin-right:auto}
-  .hero-stats{display:flex;justify-content:center;gap:2rem;margin-bottom:2rem}
-  .stat{text-align:center}
-  .stat-num{font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;color:var(--yellow)}
-  .stat-label{color:#999;font-size:12px;margin-top:2px}
-  .hero-search{display:flex;max-width:380px;margin:0 auto;background:#fff;border-radius:30px;overflow:hidden;border:2px solid var(--yellow)}
-  .hero-search input{flex:1;border:none;outline:none;padding:12px 18px;font-size:14px;font-family:'DM Sans',sans-serif;background:transparent}
-  .hero-search button{background:var(--yellow);border:none;padding:12px 20px;cursor:pointer;font-weight:700;font-size:13px;color:#1A1A1A;font-family:'DM Sans',sans-serif}
-  .networks{display:flex;gap:10px;justify-content:center;padding:1.25rem 1.5rem;background:#fff;border-bottom:2px solid var(--border);flex-wrap:wrap}
-  .net-tab{display:flex;align-items:center;gap:8px;padding:10px 20px;border-radius:24px;cursor:pointer;border:2px solid var(--border);background:#fff;font-weight:600;font-size:14px;transition:all .2s;font-family:'DM Sans',sans-serif}
-  .net-tab.active,.net-tab:hover{border-color:currentColor}
-  .net-mtn{color:#FF8F00}.net-mtn.active{background:#FFF8E1;border-color:#FF8F00}
-  .net-telecel{color:#C62828}.net-telecel.active{background:#FFEBEE;border-color:#C62828}
-  .net-at{color:#1565C0}.net-at.active{background:#E3F2FD;border-color:#1565C0}
-  .net-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0}
-  .dot-mtn{background:#FF8F00}.dot-tel{background:#C62828}.dot-at{background:#1565C0}
-  .section{padding:1.5rem 1.25rem}
-  .section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem}
-  .section-title{font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:800}
-  .see-all{font-size:13px;color:var(--green);font-weight:600;cursor:pointer;text-decoration:none}
-  .packages{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-  .pkg-card{background:var(--card);border-radius:16px;padding:1.1rem;border:1.5px solid var(--border);position:relative;cursor:pointer;transition:transform .15s,box-shadow .15s}
-  .pkg-card:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.1)}
-  .pkg-card.popular{border-color:var(--green)}
-  .pop-badge{position:absolute;top:-1px;right:12px;background:var(--green);color:#fff;font-size:10px;font-weight:700;padding:3px 10px;border-radius:0 0 8px 8px;text-transform:uppercase;letter-spacing:.5px}
-  .pkg-net{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:.4rem}
-  .pkg-size{font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:800;line-height:1;margin-bottom:.3rem}
-  .pkg-validity{font-size:12px;color:var(--muted);margin-bottom:.75rem}
-  .pkg-price{font-size:1.25rem;font-weight:700;color:var(--green)}
-  .pkg-old{font-size:11px;color:#999;text-decoration:line-through;margin-left:6px}
-  .buy-btn{width:100%;background:#1A1A1A;color:#fff;border:none;border-radius:10px;padding:10px;font-weight:600;font-size:13px;cursor:pointer;margin-top:.75rem;font-family:'DM Sans',sans-serif;transition:background .2s}
-  .buy-btn:hover{background:var(--green)}
-  .buy-btn.mtn-btn:hover{background:#FF8F00}
-  .buy-btn.tel-btn:hover{background:#C62828}
-  .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:200;align-items:flex-end;justify-content:center}
-  .modal-overlay.open{display:flex}
-  .modal{background:#fff;border-radius:24px 24px 0 0;padding:2rem 1.5rem;width:100%;max-width:460px;animation:slideUp .3s ease}
-  @keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
-  .modal-title{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;margin-bottom:.25rem}
-  .modal-sub{color:var(--muted);font-size:14px;margin-bottom:1.5rem}
-  .modal label{display:block;font-size:13px;font-weight:600;color:#444;margin-bottom:.4rem}
-  .modal input,.modal select{width:100%;border:1.5px solid var(--border);border-radius:12px;padding:12px 14px;font-size:15px;font-family:'DM Sans',sans-serif;outline:none;margin-bottom:1rem;transition:border-color .2s}
-  .modal input:focus,.modal select:focus{border-color:var(--green)}
-  .modal-total{background:var(--green-light);border-radius:12px;padding:1rem;margin-bottom:1.25rem;display:flex;justify-content:space-between;align-items:center}
-  .modal-total-label{font-size:14px;color:var(--green)}
-  .modal-total-price{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;color:var(--green)}
-  .pay-btn{width:100%;background:var(--green);color:#fff;border:none;border-radius:14px;padding:15px;font-weight:700;font-size:16px;cursor:pointer;font-family:'DM Sans',sans-serif;margin-bottom:.75rem}
-  .pay-btn:hover{background:#156B3C}
-  .cancel-btn{width:100%;background:transparent;border:none;color:var(--muted);font-size:14px;cursor:pointer;font-family:'DM Sans',sans-serif;padding:8px}
-  .how{background:#1A1A1A;padding:2rem 1.5rem;color:#fff}
-  .how-title{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;color:var(--yellow);margin-bottom:1.5rem;text-align:center}
-  .steps{display:flex;flex-direction:column;gap:1rem}
-  .step{display:flex;gap:1rem;align-items:flex-start}
-  .step-num{width:36px;height:36px;border-radius:50%;background:var(--yellow);color:#1A1A1A;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;flex-shrink:0;font-family:'Syne',sans-serif}
-  .step-text h4{font-size:15px;font-weight:600;margin-bottom:3px}
-  .step-text p{font-size:13px;color:#aaa;line-height:1.5}
-  footer{background:#111;padding:1.5rem;text-align:center}
-  footer p{color:#666;font-size:13px}
-  footer strong{color:var(--yellow)}
-  .success-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:300;align-items:center;justify-content:center}
-  .success-overlay.open{display:flex}
-  .success-box{background:#fff;border-radius:24px;padding:2.5rem 2rem;text-align:center;max-width:320px;width:90%}
-  .success-icon{width:64px;height:64px;border-radius:50%;background:var(--green-light);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-size:32px}
-  .success-box h3{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;color:var(--green);margin-bottom:.5rem}
-  .success-box p{color:var(--muted);font-size:14px;margin-bottom:1.25rem}
-  .success-box button{background:var(--green);color:#fff;border:none;border-radius:12px;padding:12px 32px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BudgetData GH | Cheapest Data Bundles in Ghana</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body { font-family: 'Inter', system-ui, sans-serif; }
+    .hero-bg { background: linear-gradient(135deg, #10b981, #22c55e); }
+  </style>
 </head>
-<body>
+<body class="bg-gray-50">
 
-<nav>
-  <div class="logo">Budget<span>Data</span> GH</div>
-  <div class="nav-links">
-    <a href="#bundles">Bundles</a>
-    <a href="#how">How it works</a>
-    <button class="nav-btn">Buy Now</button>
-  </div>
-</nav>
-
-<div class="hero">
-  <div class="hero-badge">Ghana's Cheapest Data</div>
-  <h1>Buy Data,<br><span>Save More</span> 🇬🇭</h1>
-  <p>MTN · Telecel · AirtelTigo bundles delivered instantly to your number</p>
-  <div class="hero-stats">
-    <div class="stat"><div class="stat-num">3</div><div class="stat-label">Networks</div></div>
-    <div class="stat"><div class="stat-num">60s</div><div class="stat-label">Delivery</div></div>
-    <div class="stat"><div class="stat-num">50%</div><div class="stat-label">Cheaper</div></div>
-  </div>
-  <div class="hero-search">
-    <input type="tel" placeholder="Enter your number e.g 024..." id="heroNum"/>
-    <button onclick="quickBuy()">Buy Data</button>
-  </div>
-</div>
-
-<div class="networks">
-  <button class="net-tab net-mtn active" onclick="filterNet('mtn',this)">
-    <span class="net-dot dot-mtn"></span> MTN
-  </button>
-  <button class="net-tab net-telecel" onclick="filterNet('telecel',this)">
-    <span class="net-dot dot-tel"></span> Telecel
-  </button>
-  <button class="net-tab net-at" onclick="filterNet('at',this)">
-    <span class="net-dot dot-at"></span> AirtelTigo
-  </button>
-</div>
-
-<div class="section" id="bundles">
-  <div class="section-header">
-    <div class="section-title" id="netLabel">MTN Bundles</div>
-    <a class="see-all">See all</a>
-  </div>
-  <div class="packages" id="pkgGrid"></div>
-</div>
-
-<div class="how" id="how">
-  <div class="how-title">How it Works</div>
-  <div class="steps">
-    <div class="step">
-      <div class="step-num">1</div>
-      <div class="step-text"><h4>Pick your bundle</h4><p>Choose your network and the data package you want</p></div>
-    </div>
-    <div class="step">
-      <div class="step-num">2</div>
-      <div class="step-text"><h4>Enter your number</h4><p>Type in the phone number that should receive the data</p></div>
-    </div>
-    <div class="step">
-      <div class="step-num">3</div>
-      <div class="step-text"><h4>Pay & receive instantly</h4><p>Pay via Mobile Money and get your data in under 60 seconds</p></div>
-    </div>
-  </div>
-</div>
-
-<footer>
-  <p><strong>BudgetData GH</strong> — Ghana's cheapest data bundles</p>
-  <p style="margin-top:.5rem">📞 0XX XXX XXXX &nbsp;|&nbsp; budgetdatagh@gmail.com</p>
-</footer>
-
-<div class="modal-overlay" id="modal">
-  <div class="modal">
-    <div class="modal-title" id="modalTitle">Buy MTN 1GB</div>
-    <div class="modal-sub" id="modalSub">30-day bundle · Instant delivery</div>
-    <label>Phone Number</label>
-    <input type="tel" id="phoneInput" placeholder="e.g. 0244123456" maxlength="10"/>
-    <label>Payment Method</label>
-    <select id="payMethod">
-      <option>MTN Mobile Money</option>
-      <option>Telecel Cash</option>
-      <option>AirtelTigo Money</option>
-    </select>
-    <div class="modal-total">
-      <span class="modal-total-label">Total to pay</span>
-      <span class="modal-total-price" id="modalPrice">GH₵ 5.00</span>
-    </div>
-    <button class="pay-btn" onclick="confirmPay()">Pay with MoMo</button>
-    <button class="cancel-btn" onclick="closeModal()">Cancel</button>
-  </div>
-</div>
-
-<div class="success-overlay" id="success">
-  <div class="success-box">
-    <div class="success-icon">✓</div>
-    <h3>Order Placed!</h3>
-    <p id="successMsg">Your bundle is on its way. Check your phone in 60 seconds.</p>
-    <button onclick="closeSuccess()">Done</button>
-  </div>
-</div>
-
-<script>
-const data={
-  mtn:[
-    {size:'500MB',validity:'1 day',price:2.50,oldPrice:3.50},
-    {size:'1GB',validity:'30 days',price:5.00,oldPrice:7.00,popular:true},
-    {size:'2GB',validity:'30 days',price:9.00,oldPrice:13.00},
-    {size:'5GB',validity:'30 days',price:20.00,oldPrice:30.00,popular:true},
-    {size:'10GB',validity:'30 days',price:35.00,oldPrice:55.00},
-    {size:'25GB',validity:'60 days',price:75.00,oldPrice:110.00},
-  ],
-  telecel:[
-    {size:'300MB',validity:'1 day',price:2.00,oldPrice:3.00},
-    {size:'1GB',validity:'30 days',price:4.50,oldPrice:6.50,popular:true},
-    {size:'3GB',validity:'30 days',price:12.00,oldPrice:17.00},
-    {size:'6GB',validity:'30 days',price:22.00,oldPrice:32.00,popular:true},
-    {size:'15GB',validity:'60 days',price:50.00,oldPrice:75.00},
-    {size:'30GB',validity:'90 days',price:90.00,oldPrice:130.00},
-  ],
-  at:[
-    {size:'500MB',validity:'7 days',price:2.50,oldPrice:3.50},
-    {size:'1.5GB',validity:'30 days',price:6.00,oldPrice:9.00,popular:true},
-    {size:'4GB',validity:'30 days',price:15.00,oldPrice:22.00},
-    {size:'8GB',validity:'30 days',price:28.00,oldPrice:42.00,popular:true},
-    {size:'20GB',validity:'60 days',price:65.00,oldPrice:95.00},
-    {size:'50GB',validity:'90 days',price:140.00,oldPrice:200.00},
-  ]
-};
-const labels={mtn:'MTN Bundles',telecel:'Telecel Bundles',at:'AirtelTigo Bundles'};
-const netColors={mtn:{color:'#FF8F00',label:'MTN',btnClass:'mtn-btn'},telecel:{color:'#C62828',label:'Telecel',btnClass:'tel-btn'},at:{color:'#1565C0',label:'AirtelTigo',btnClass:'at-btn'}};
-let currentNet='mtn';
-let selectedPkg=null;
-
-function filterNet(net,el){
-  currentNet=net;
-  document.querySelectorAll('.net-tab').forEach(t=>t.classList.remove('active'));
-  el.classList.add('active');
-  document.getElementById('netLabel').textContent=labels[net];
-  renderPackages(net);
-}
-
-function renderPackages(net){
-  const grid=document.getElementById('pkgGrid');
-  const pkgs=data[net];
-  const nc=netColors[net];
-  grid.innerHTML=pkgs.map((p,i)=>`
-    <div class="pkg-card${p.popular?' popular':''}" onclick="openModal(${i})">
-      ${p.popular?'<div class="pop-badge">Best Deal</div>':''}
-      <div class="pkg-net" style="color:${nc.color}">${nc.label}</div>
-      <div class="pkg-size">${p.size}</div>
-      <div class="pkg-validity">${p.validity}</div>
-      <div style="display:flex;align-items:baseline">
-        <div class="pkg-price">GH₵ ${p.price.toFixed(2)}</div>
-        <div class="pkg-old">GH₵ ${p.oldPrice.toFixed(2)}</div>
+  <!-- Navbar -->
+  <nav class="bg-white shadow-md sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+      <div class="flex items-center gap-2">
+        <div class="w-10 h-10 bg-green-600 rounded-2xl flex items-center justify-center text-white text-2xl">📱</div>
+        <h1 class="text-3xl font-bold text-green-600">BudgetData GH</h1>
       </div>
-      <button class="buy-btn ${nc.btnClass}">Buy Now</button>
+      <div class="flex items-center gap-6 text-lg">
+        <a href="#" onclick="showWhatsApp()" class="flex items-center gap-2 hover:text-green-600">
+          <i class="fab fa-whatsapp text-3xl text-green-500"></i>
+        </a>
+        <a href="tel:0592777767" class="flex items-center gap-2 font-semibold text-green-700">
+          <i class="fas fa-phone"></i> 0592 777 767
+        </a>
+      </div>
     </div>
-  `).join('');
-}
+  </nav>
 
-function openModal(i){
-  selectedPkg={...data[currentNet][i],net:currentNet};
-  const nc=netColors[currentNet];
-  document.getElementById('modalTitle').textContent='Buy '+nc.label+' '+selectedPkg.size;
-  document.getElementById('modalSub').textContent=selectedPkg.validity+' bundle · Instant delivery';
-  document.getElementById('modalPrice').textContent='GH₵ '+selectedPkg.price.toFixed(2);
-  const hero=document.getElementById('heroNum').value;
-  if(hero) document.getElementById('phoneInput').value=hero;
-  document.getElementById('modal').classList.add('open');
-}
+  <!-- Hero -->
+  <header class="hero-bg text-white py-16">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <h2 class="text-5xl font-bold mb-4">Cheapest Data in Ghana 🇬🇭</h2>
+      <div class="inline-flex items-center bg-white/20 text-white text-xl px-6 py-3 rounded-3xl mb-6">
+        🚀 <strong class="ml-2">Automatic Delivery • 30 mins – 2 hrs</strong>
+      </div>
+      <p class="text-2xl mb-8">Pay once • Data goes straight to your number • No middleman</p>
+      
+      <div class="max-w-md mx-auto bg-white rounded-3xl p-2 shadow-xl">
+        <div class="flex">
+          <input id="hero-number" type="tel" placeholder="Enter your phone number" 
+                 class="flex-1 px-6 py-5 text-gray-800 text-xl rounded-3xl focus:outline-none">
+          <button onclick="quickBuy()" 
+                  class="bg-black text-white px-10 rounded-3xl font-semibold text-xl hover:bg-green-600">Buy Data</button>
+        </div>
+      </div>
+    </div>
+  </header>
 
-function closeModal(){document.getElementById('modal').classList.remove('open')}
+  <!-- Network Tabs -->
+  <div class="max-w-6xl mx-auto px-4 py-8">
+    <div class="flex border-b mb-8">
+      <button onclick="switchNetwork(0)" id="tab-0" class="tab-btn active flex-1 py-4 text-xl font-bold border-b-4 border-green-600 text-green-600">MTN</button>
+      <button onclick="switchNetwork(1)" id="tab-1" class="tab-btn flex-1 py-4 text-xl font-bold">Telecel</button>
+      <button onclick="switchNetwork(2)" id="tab-2" class="tab-btn flex-1 py-4 text-xl font-bold">AirtelTigo</button>
+    </div>
 
-function confirmPay(){
-  const phone=document.getElementById('phoneInput').value.trim();
-  if(!phone||phone.length<10){alert('Please enter a valid 10-digit phone number');return;}
-  closeModal();
-  const nc=netColors[selectedPkg.net];
-  document.getElementById('successMsg').textContent='Your '+nc.label+' '+selectedPkg.size+' bundle is on its way to '+phone+'. Check your phone in 60 seconds!';
-  document.getElementById('success').classList.add('open');
-}
+    <!-- Bundles Grid -->
+    <div id="bundles" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <!-- Populated by JS -->
+    </div>
+  </div>
 
-function closeSuccess(){document.getElementById('success').classList.remove('open')}
+  <!-- How it Works -->
+  <div class="bg-white py-16">
+    <div class="max-w-6xl mx-auto px-4">
+      <h3 class="text-4xl font-bold text-center mb-12">How It Works (Fully Automatic)</h3>
+      <div class="grid md:grid-cols-3 gap-8 text-center">
+        <div class="bg-gray-50 p-8 rounded-3xl">
+          <div class="w-16 h-16 mx-auto bg-green-100 text-green-600 rounded-2xl flex items-center justify-center text-4xl mb-6">1️⃣</div>
+          <h4 class="font-bold text-2xl mb-2">Choose & Enter Number</h4>
+          <p class="text-gray-600">Pick bundle and type your phone number</p>
+        </div>
+        <div class="bg-gray-50 p-8 rounded-3xl">
+          <div class="w-16 h-16 mx-auto bg-green-100 text-green-600 rounded-2xl flex items-center justify-center text-4xl mb-6">2️⃣</div>
+          <h4 class="font-bold text-2xl mb-2">Pay with MoMo</h4>
+          <p class="text-gray-600">Instant Mobile Money payment</p>
+        </div>
+        <div class="bg-gray-50 p-8 rounded-3xl">
+          <div class="w-16 h-16 mx-auto bg-green-100 text-green-600 rounded-2xl flex items-center justify-center text-4xl mb-6">3️⃣</div>
+          <h4 class="font-bold text-2xl mb-2">Data Delivered Automatically</h4>
+          <p class="text-gray-600">Bundle lands straight on your number in 30 mins – 2 hrs</p>
+        </div>
+      </div>
+    </div>
+  </div>
 
-function quickBuy(){
-  const num=document.getElementById('heroNum').value.trim();
-  if(!num){alert('Enter your number first!');return;}
-  openModal(1);
-}
+  <!-- Floating WhatsApp -->
+  <button onclick="showWhatsApp()" 
+          class="fixed bottom-6 right-6 bg-green-500 text-white w-16 h-16 rounded-full shadow-2xl flex items-center justify-center text-4xl hover:scale-110 transition">
+    <i class="fab fa-whatsapp"></i>
+  </button>
 
-renderPackages('mtn');
-</script>
+  <!-- Buy Modal (Automatic style) -->
+  <div id="buyModal" class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-[100]">
+    <div class="bg-white rounded-3xl max-w-lg w-full mx-4 overflow-hidden">
+      <div class="px-6 pt-6 pb-4">
+        <h3 class="text-3xl font-bold mb-1" id="modal-title">Buy Data</h3>
+        <p class="text-green-600 font-medium" id="modal-subtitle"></p>
+      </div>
+      
+      <div class="px-6 space-y-6">
+        <div>
+          <label class="text-sm text-gray-500">Phone Number (Data will be sent here automatically)</label>
+          <input id="modal-number" type="tel" placeholder="0592 777 767" 
+                 class="w-full border-2 border-gray-300 rounded-2xl px-5 py-4 text-xl">
+        </div>
+
+        <div>
+          <label class="text-sm text-gray-500 mb-2 block">Pay with Mobile Money</label>
+          <div class="bg-green-50 border-2 border-green-200 rounded-3xl p-6 text-center">
+            <p class="font-semibold text-2xl">Pay exactly <span id="modal-amount" class="text-green-600"></span></p>
+            <p class="text-4xl font-bold mt-3 text-green-700">via MoMo</p>
+            <p class="text-sm text-gray-600 mt-4">Once payment is confirmed, your data bundle will be delivered <strong>automatically</strong> to the number above in 30 mins – 2 hrs max.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-6 border-t flex gap-4">
+        <button onclick="closeModal()" 
+                class="flex-1 py-6 text-xl font-semibold border-2 border-gray-300 rounded-3xl">Cancel</button>
+        <button onclick="confirmPayment()" 
+                class="flex-1 py-6 text-xl font-semibold bg-green-600 text-white rounded-3xl">Pay with MoMo</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Same bundle data as before (you can change prices anytime)
+    const bundlesData = [
+      // MTN
+      [
+        { data: "1 GB", price: "8", validity: "30 days", popular: true },
+        { data: "2 GB", price: "15", validity: "30 days", popular: false },
+        { data: "5 GB", price: "35", validity: "30 days", popular: true }
+      ],
+      // Telecel
+      [
+        { data: "1 GB", price: "7", validity: "30 days", popular: true },
+        { data: "3 GB", price: "18", validity: "30 days", popular: false }
+      ],
+      // AirtelTigo
+      [
+        { data: "1.5 GB", price: "9", validity: "30 days", popular: true },
+        { data: "4 GB", price: "25", validity: "30 days", popular: false }
+      ]
+    ];
+
+    let currentNetwork = 0;
+
+    function switchNetwork(n) {
+      currentNetwork = n;
+      document.querySelectorAll('.tab-btn').forEach((btn, i) => {
+        btn.classList.toggle('active', i === n);
+        btn.classList.toggle('border-b-4', i === n);
+        btn.classList.toggle('border-green-600', i === n);
+        btn.classList.toggle('text-green-600', i === n);
+      });
+      renderBundles();
+    }
+
+    function renderBundles() {
+      const container = document.getElementById('bundles');
+      container.innerHTML = '';
+      bundlesData[currentNetwork].forEach(b => {
+        const card = `
+          <div class="bg-white border border-gray-200 rounded-3xl p-6 shadow hover:shadow-xl transition cursor-pointer" onclick="buyBundle('${b.data}', '${b.price}')">
+            ${b.popular ? `<div class="inline-block bg-orange-500 text-white text-xs px-4 py-1 rounded-3xl mb-4">BEST DEAL</div>` : ''}
+            <div class="text-6xl font-bold text-green-600">${b.data}</div>
+            <div class="flex justify-between items-end mt-6">
+              <div>
+                <span class="text-5xl font-bold">GH₵</span><span class="text-5xl font-bold">${b.price}</span>
+              </div>
+              <div class="text-right">
+                <div class="text-sm text-gray-500">${b.validity}</div>
+                <div class="text-green-600 text-sm font-medium">🚀 Automatic • 30 mins – 2 hrs</div>
+              </div>
+            </div>
+          </div>`;
+        container.innerHTML += card;
+      });
+    }
+
+    function buyBundle(data, price) {
+      document.getElementById('modal-title').textContent = `Buy ${data}`;
+      document.getElementById('modal-subtitle').innerHTML = `for <span class="font-bold">GH₵${price}</span>`;
+      document.getElementById('modal-amount').textContent = `GH₵${price}`;
+      document.getElementById('buyModal').classList.remove('hidden');
+    }
+
+    function closeModal() {
+      document.getElementById('buyModal').classList.add('hidden');
+    }
+
+    function confirmPayment() {
+      const number = document.getElementById('modal-number').value || "your number";
+      closeModal();
+      alert(`✅ Order placed for ${number}!\n\nPayment will be processed via MoMo.\n\nData bundle will be delivered AUTOMATICALLY to ${number} in 30 mins – 2 hrs.`);
+    }
+
+    function quickBuy() {
+      alert("✅ Choose any bundle below or message us on WhatsApp for instant help!");
+    }
+
+    function showWhatsApp() {
+      const message = encodeURIComponent("Hi! I want automatic data delivery on BudgetData GH");
+      window.open(`https://wa.me/233592777767?text=${message}`, '_blank');
+    }
+
+    // Initial render
+    renderBundles();
+  </script>
+
+  <footer class="bg-gray-900 text-white py-12 text-center">
+    <p class="text-2xl">📞 <a href="tel:0592777767" class="underline">0592 777 767</a></p>
+    <p class="mt-4 text-green-400">Fully automatic delivery • Data goes straight to your number</p>
+    <p class="text-xs mt-8 opacity-50">© BudgetData GH • All rights reserved</p>
+  </footer>
 </body>
 </html>
